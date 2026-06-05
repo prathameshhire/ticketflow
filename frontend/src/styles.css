@@ -198,7 +198,7 @@ button:disabled {
 
 .brand-mark {
   width: 52px;
-  height: 30px;
+  height: 36px;
   display: block;
   object-fit: contain;
   flex: 0 0 auto;
@@ -836,8 +836,8 @@ textarea.control {
 }
 
 .landing-preview-logo {
-  width: 46px;
-  height: 27px;
+  width: 48px;
+  height: 34px;
 }
 
 .landing-preview-content {
