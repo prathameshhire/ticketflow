@@ -532,7 +532,7 @@ textarea.control {
 .landing-hero-copy {
   position: relative;
   z-index: 2;
-  max-width: 620px;
+  max-width: 480px;
   padding-top: 8px;
 }
 
@@ -546,7 +546,7 @@ textarea.control {
 }
 
 .landing-hero h1 {
-  max-width: 760px;
+  max-width: 500px;
   margin: 0;
   font-size: clamp(3.25rem, 7vw, 5.75rem);
   line-height: 0.9;
@@ -555,7 +555,7 @@ textarea.control {
 }
 
 .landing-hero-copy > p:not(.landing-kicker) {
-  max-width: 540px;
+  max-width: 480px;
   margin: 18px 0 0;
   color: #4f615d;
   font-size: 1.18rem;
@@ -1025,6 +1025,18 @@ textarea.control {
   .landing-hero {
     min-height: 0;
     padding-top: 42px;
+  }
+
+  .landing-hero-copy {
+    max-width: 620px;
+  }
+
+  .landing-hero h1 {
+    max-width: 760px;
+  }
+
+  .landing-hero-copy > p:not(.landing-kicker) {
+    max-width: 540px;
   }
 
   .landing-hero::before {
