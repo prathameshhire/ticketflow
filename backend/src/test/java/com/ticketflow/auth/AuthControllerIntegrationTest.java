@@ -50,6 +50,25 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
+    void registerIgnoresStaleBearerToken() throws Exception {
+        String email = uniqueEmail();
+
+        mockMvc.perform(post("/api/auth/register")
+                        .header("Authorization", "Bearer stale-or-expired-token")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "name": "Grace Hopper",
+                                  "email": "%s",
+                                  "password": "password123"
+                                }
+                                """.formatted(email)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token", notNullValue()))
+                .andExpect(jsonPath("$.user.email").value(email));
+    }
+
+    @Test
     void loginReturnsTokenAfterRegistration() throws Exception {
         String email = uniqueEmail();
         register(email);
@@ -111,4 +130,3 @@ class AuthControllerIntegrationTest {
         return "user-" + UUID.randomUUID() + "@example.com";
     }
 }
-
