@@ -1,0 +1,32 @@
+<section class="auth-shell">
+  <div class="auth-card">
+    <div class="brand">
+      <span class="brand-mark">TF</span>
+      <span>TicketFlow</span>
+    </div>
+    <h1 class="page-title" style="margin-top: 24px;">Sign in</h1>
+    <p class="page-copy">Access incidents, alerts, and SLA analytics.</p>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" class="control" type="email" autocomplete="email" formControlName="email">
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" class="control" type="password" autocomplete="current-password" formControlName="password">
+      </div>
+
+      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <button class="button" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="page-copy" style="margin-top: 18px;">
+      Need an account? <a class="link" routerLink="/register">Create one</a>
+    </p>
+  </div>
+</section>

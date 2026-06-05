@@ -1,0 +1,106 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Ticket Detail</h1>
+    <p class="page-copy" *ngIf="ticket">#{{ ticket.id }} created {{ ticket.createdAt | date:'medium' }}</p>
+  </div>
+  <a class="button secondary" routerLink="/tickets">Back to Tickets</a>
+</section>
+
+<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+<div class="empty" *ngIf="isTicketLoading">Loading ticket...</div>
+
+<ng-container *ngIf="!isTicketLoading && ticket as item">
+  <section class="grid two">
+    <article class="card">
+      <div class="page-header" style="margin-bottom: 14px;">
+        <div>
+          <h2 class="page-title" style="font-size: 1.25rem;">{{ item.title }}</h2>
+          <p class="page-copy">{{ item.description }}</p>
+        </div>
+      </div>
+
+      <div class="meta-list">
+        <div class="meta-item">
+          <div class="meta-label">Status</div>
+          <div class="meta-value"><span class="badge" [ngClass]="item.status.toLowerCase()">{{ item.status }}</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Priority</div>
+          <div class="meta-value"><span class="badge" [ngClass]="item.priority.toLowerCase()">{{ item.priority }}</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Customer</div>
+          <div class="meta-value">{{ item.customer.name }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Assigned Agent</div>
+          <div class="meta-value">{{ item.assignedAgent?.name || 'Unassigned' }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">SLA Due</div>
+          <div class="meta-value">{{ item.slaDueAt | date:'medium' }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Resolved</div>
+          <div class="meta-value">{{ item.resolvedAt ? (item.resolvedAt | date:'medium') : 'Not resolved' }}</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2 class="page-title" style="font-size: 1.15rem;">Actions</h2>
+
+      <form class="form" [formGroup]="statusForm" (ngSubmit)="updateStatus()" *ngIf="canManageStatus(item)">
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status" class="control" formControlName="status">
+            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <button class="button" type="submit" [disabled]="isUpdatingStatus">
+          {{ isUpdatingStatus ? 'Updating...' : 'Update Status' }}
+        </button>
+      </form>
+
+      <form class="form" [formGroup]="assignForm" (ngSubmit)="assignTicket()" *ngIf="canAssign()">
+        <div class="field">
+          <label for="assignedAgentId">Assigned Agent</label>
+          <select id="assignedAgentId" class="control" formControlName="assignedAgentId" [disabled]="isLoadingAgents">
+            <option value="">Unassigned</option>
+            <option *ngFor="let agent of agentOptions" [value]="agent.id">{{ agent.name }} - {{ agent.email }}</option>
+          </select>
+        </div>
+        <button class="button secondary" type="submit" [disabled]="isAssigning || isLoadingAgents">
+          {{ isAssigning ? 'Assigning...' : 'Update Assignment' }}
+        </button>
+        <p class="page-copy" *ngIf="isLoadingAgents">Loading agents...</p>
+        <p class="page-copy" *ngIf="!isLoadingAgents && agentOptions.length === 0">No assigned agents are available yet.</p>
+      </form>
+
+      <div class="empty" *ngIf="!canManageStatus(item) && !canAssign()">No ticket actions available for your role.</div>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top: 16px;">
+    <h2 class="page-title" style="font-size: 1.15rem;">Comments</h2>
+
+    <div class="empty" *ngIf="isCommentsLoading">Loading comments...</div>
+    <div class="empty" *ngIf="!isCommentsLoading && comments.length === 0">No comments yet.</div>
+    <div class="comment" *ngFor="let comment of comments">
+      <strong>{{ comment.author.name }}</strong>
+      <span class="muted">{{ comment.createdAt | date:'medium' }}</span>
+      <span>{{ comment.body }}</span>
+    </div>
+
+    <form class="form" [formGroup]="commentForm" (ngSubmit)="addComment()">
+      <div class="field">
+        <label for="body">Add Comment</label>
+        <textarea id="body" class="control" formControlName="body"></textarea>
+      </div>
+      <button class="button" type="submit" [disabled]="isAddingComment">
+        {{ isAddingComment ? 'Posting...' : 'Post Comment' }}
+      </button>
+    </form>
+  </section>
+</ng-container>

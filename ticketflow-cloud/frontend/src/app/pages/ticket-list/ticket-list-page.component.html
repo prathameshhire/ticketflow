@@ -1,0 +1,93 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Tickets</h1>
+    <p class="page-copy">Search, filter, and inspect incident work.</p>
+  </div>
+  <a class="button" routerLink="/tickets/new" *ngIf="canCreateTicket()">Create Ticket</a>
+</section>
+
+<form class="toolbar" [formGroup]="filtersForm" (ngSubmit)="applyFilters()">
+  <div class="field">
+    <label for="q">Search</label>
+    <input id="q" class="control" type="search" formControlName="q" placeholder="Title or description">
+  </div>
+  <div class="field">
+    <label for="status">Status</label>
+    <select id="status" class="control" formControlName="status">
+      <option value="">Any</option>
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="priority">Priority</label>
+    <select id="priority" class="control" formControlName="priority">
+      <option value="">Any</option>
+      <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="agent">Agent ID</label>
+    <input id="agent" class="control" type="number" min="1" formControlName="assignedAgentId">
+  </div>
+  <div class="field">
+    <label for="customer">Customer ID</label>
+    <input id="customer" class="control" type="number" min="1" formControlName="customerId">
+  </div>
+  <div class="field">
+    <label for="sort">Sort</label>
+    <select id="sort" class="control" formControlName="sort">
+      <option value="createdAt">Created</option>
+      <option value="priority">Priority</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="size">Page Size</label>
+    <select id="size" class="control" formControlName="size">
+      <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+    </select>
+  </div>
+  <div class="button-row">
+    <button class="button" type="submit">Apply</button>
+    <button class="button secondary" type="button" (click)="clearFilters()">Clear</button>
+  </div>
+</form>
+
+<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<section class="card">
+  <div class="empty" *ngIf="isLoading">Loading tickets...</div>
+  <div class="empty" *ngIf="!isLoading && page?.content?.length === 0">No tickets found.</div>
+
+  <div class="table-wrap" *ngIf="!isLoading && page && page.content.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Agent</th>
+          <th>SLA Due</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of page.content">
+          <td>#{{ ticket.id }}</td>
+          <td><a class="link" [routerLink]="['/tickets', ticket.id]">{{ ticket.title }}</a></td>
+          <td><span class="badge" [ngClass]="ticket.status.toLowerCase()">{{ ticket.status }}</span></td>
+          <td><span class="badge" [ngClass]="ticket.priority.toLowerCase()">{{ ticket.priority }}</span></td>
+          <td>{{ ticket.assignedAgent?.name || 'Unassigned' }}</td>
+          <td>{{ ticket.slaDueAt | date:'short' }}</td>
+          <td>{{ ticket.createdAt | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="button-row" style="justify-content: space-between; margin-top: 16px;" *ngIf="page">
+    <button class="button secondary" type="button" (click)="previousPage()" [disabled]="page.first">Previous</button>
+    <span class="muted">Page {{ page.page + 1 }} of {{ page.totalPages || 1 }} - {{ page.totalElements }} tickets</span>
+    <button class="button secondary" type="button" (click)="nextPage()" [disabled]="page.last">Next</button>
+  </div>
+</section>

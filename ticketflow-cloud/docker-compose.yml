@@ -1,0 +1,67 @@
+name: ticketflow
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ticketflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ticketflow
+      POSTGRES_USER: ticketflow
+      POSTGRES_PASSWORD: ticketflow_dev_password
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ticketflow-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ticketflow -d ticketflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ticketflow-backend
+    profiles:
+      - backend
+      - stack
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 8080
+      SPRING_PROFILES_ACTIVE: docker
+      DATABASE_URL: jdbc:postgresql://postgres:5432/ticketflow
+      DATABASE_USERNAME: ticketflow
+      DATABASE_PASSWORD: ticketflow_dev_password
+      JWT_SECRET: ${JWT_SECRET:-local-dev-placeholder-not-a-real-secret-change-me-32chars}
+      ALLOWED_ORIGINS: http://localhost:4200,http://127.0.0.1:4200
+      APP_SEED_ENABLED: "true"
+      ALERT_CORE_POOL_SIZE: 1
+      ALERT_MAX_POOL_SIZE: 2
+      ALERT_QUEUE_CAPACITY: 25
+      DASHBOARD_CACHE_TTL_SECONDS: 15
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NG_APP_API_URL: ${NG_APP_API_URL:-http://localhost:8080/api}
+    container_name: ticketflow-frontend
+    profiles:
+      - frontend
+      - stack
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-4200}:80"
+
+volumes:
+  ticketflow-postgres-data:

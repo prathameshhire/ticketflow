@@ -1,0 +1,18 @@
+# Java / Maven
+backend/target/
+
+# Angular / Node
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/src/assets/env.js
+
+# Logs and local environment
+*.log
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/

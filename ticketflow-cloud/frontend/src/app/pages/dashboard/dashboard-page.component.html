@@ -1,0 +1,90 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-copy">Ticket volume, SLA risk, and agent workload.</p>
+  </div>
+</section>
+
+<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="empty" *ngIf="isLoading">Loading dashboard...</div>
+
+<ng-container *ngIf="!isLoading && summary as data">
+  <section class="grid stats">
+    <article class="card">
+      <div class="stat-value">{{ data.totalTickets }}</div>
+      <div class="stat-label">Total</div>
+    </article>
+    <article class="card">
+      <div class="stat-value">{{ data.openCount }}</div>
+      <div class="stat-label">Open</div>
+    </article>
+    <article class="card">
+      <div class="stat-value">{{ data.inProgressCount }}</div>
+      <div class="stat-label">In Progress</div>
+    </article>
+    <article class="card">
+      <div class="stat-value">{{ data.resolvedCount }}</div>
+      <div class="stat-label">Resolved</div>
+    </article>
+    <article class="card">
+      <div class="stat-value">{{ data.overdueSlaCount }}</div>
+      <div class="stat-label">Overdue SLA</div>
+    </article>
+  </section>
+
+  <section class="grid two" style="margin-top: 16px;">
+    <article class="card">
+      <h2 class="page-title" style="font-size: 1.1rem;">By Priority</h2>
+      <div class="meta-list" style="margin-top: 14px;">
+        <div class="meta-item" *ngFor="let priority of priorities">
+          <div class="meta-label">{{ priority }}</div>
+          <div class="meta-value">{{ data.ticketsByPriority[priority] || 0 }}</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2 class="page-title" style="font-size: 1.1rem;">By Status</h2>
+      <div class="meta-list" style="margin-top: 14px;">
+        <div class="meta-item" *ngFor="let status of statuses">
+          <div class="meta-label">{{ status }}</div>
+          <div class="meta-value">{{ data.ticketsByStatus[status] || 0 }}</div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top: 16px;">
+    <div class="page-header" style="margin-bottom: 8px;">
+      <div>
+        <h2 class="page-title" style="font-size: 1.1rem;">Agent Workload</h2>
+        <p class="page-copy">Average resolution: {{ data.averageResolutionTimeHours | number:'1.1-1' }} hours</p>
+      </div>
+    </div>
+
+    <div class="empty" *ngIf="data.agentWorkload.length === 0">No assigned agent workload yet.</div>
+
+    <div class="table-wrap" *ngIf="data.agentWorkload.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Email</th>
+            <th>Assigned</th>
+            <th>Open</th>
+            <th>In Progress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agent of data.agentWorkload">
+            <td>{{ agent.agentName }}</td>
+            <td>{{ agent.agentEmail }}</td>
+            <td>{{ agent.totalAssigned }}</td>
+            <td>{{ agent.openCount }}</td>
+            <td>{{ agent.inProgressCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ng-container>

@@ -1,0 +1,39 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Create Ticket</h1>
+    <p class="page-copy">Capture the incident details and initial priority.</p>
+  </div>
+  <a class="button secondary" routerLink="/tickets">Back to Tickets</a>
+</section>
+
+<section class="card">
+  <div class="empty" *ngIf="!canCreateTicket()">Only customer accounts can create tickets.</div>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()" *ngIf="canCreateTicket()">
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" class="control" type="text" formControlName="title">
+    </div>
+
+    <div class="field">
+      <label for="priority">Priority</label>
+      <select id="priority" class="control" formControlName="priority">
+        <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" class="control" formControlName="description"></textarea>
+    </div>
+
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div class="button-row">
+      <button class="button" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Creating...' : 'Create Ticket' }}
+      </button>
+      <a class="button secondary" routerLink="/tickets">Cancel</a>
+    </div>
+  </form>
+</section>

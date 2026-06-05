@@ -1,0 +1,31 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/dashboard" aria-label="TicketFlow dashboard">
+      <span class="brand-mark">TF</span>
+      <span>TicketFlow</span>
+    </a>
+
+    <nav class="nav-list" aria-label="Primary navigation">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a class="nav-link" routerLink="/tickets" routerLinkActive="active">Tickets</a>
+      <ng-container *ngIf="currentUser$ | async as user">
+        <a class="nav-link" routerLink="/tickets/new" routerLinkActive="active" *ngIf="canCreateTicket(user.role)">New Ticket</a>
+      </ng-container>
+      <a class="nav-link" routerLink="/alerts" routerLinkActive="active">Alerts</a>
+    </nav>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div class="user-chip" *ngIf="currentUser$ | async as user">
+        <span>{{ user.name }}</span>
+        <span class="badge">{{ user.role }}</span>
+      </div>
+      <button type="button" class="button secondary" (click)="logout()">Sign out</button>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

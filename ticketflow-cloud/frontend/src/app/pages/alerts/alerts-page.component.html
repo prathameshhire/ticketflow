@@ -1,0 +1,30 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Alerts</h1>
+    <p class="page-copy">Assignments, comments, SLA warnings, and status changes.</p>
+  </div>
+  <button class="button secondary" type="button" (click)="markAllRead()" [disabled]="isMarkingAll || !hasUnreadAlerts()">
+    {{ isMarkingAll ? 'Marking...' : 'Mark All Read' }}
+  </button>
+</section>
+
+<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+<div class="empty" *ngIf="isLoading">Loading alerts...</div>
+
+<section class="grid" *ngIf="!isLoading">
+  <article class="card" *ngFor="let alert of alerts" [ngClass]="{ muted: alert.readFlag }">
+    <div class="page-header" style="margin-bottom: 0;">
+      <div>
+        <span class="badge">{{ alert.type }}</span>
+        <p style="margin: 12px 0 4px;">{{ alert.message }}</p>
+        <span class="muted">{{ alert.createdAt | date:'medium' }}</span>
+      </div>
+      <button class="button secondary" type="button" (click)="markRead(alert)" [disabled]="alert.readFlag || isMarkingRead(alert.id)">
+        {{ alert.readFlag ? 'Read' : (isMarkingRead(alert.id) ? 'Marking...' : 'Mark Read') }}
+      </button>
+    </div>
+  </article>
+
+  <div class="empty" *ngIf="alerts.length === 0">No alerts yet.</div>
+</section>

@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/ticketflow}
+    username: ${DATABASE_USERNAME:ticketflow}
+    password: ${DATABASE_PASSWORD:ticketflow_dev_password}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  sql:
+    init:
+      mode: never
+
+ticketflow:
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200,http://127.0.0.1:4200}
+    jwt-secret: ${JWT_SECRET:local-dev-placeholder-not-a-real-secret-change-me-32chars}
