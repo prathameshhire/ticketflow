@@ -27,6 +27,10 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background:
@@ -67,20 +71,121 @@ button:disabled {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 28px;
   background:
-    linear-gradient(135deg, rgba(23, 107, 93, 0.09), transparent 34%),
-    linear-gradient(315deg, rgba(49, 95, 189, 0.08), transparent 36%),
+    linear-gradient(135deg, rgba(23, 107, 93, 0.12) 0 22%, transparent 22% 100%),
+    linear-gradient(315deg, rgba(49, 95, 189, 0.1) 0 20%, transparent 20% 100%),
+    repeating-linear-gradient(135deg, rgba(23, 107, 93, 0.045) 0 1px, transparent 1px 28px),
     var(--bg);
 }
 
+.auth-scene {
+  width: min(940px, 100%);
+  display: grid;
+  grid-template-columns: minmax(320px, 440px) minmax(280px, 1fr);
+  align-items: stretch;
+  gap: 16px;
+}
+
 .auth-card {
-  width: min(440px, 100%);
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: var(--shadow);
   padding: 30px;
+}
+
+.auth-preview {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: end;
+  gap: 14px;
+  border: 1px solid rgba(191, 208, 204, 0.88);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(16, 27, 26, 0.92), rgba(23, 107, 93, 0.82)),
+    linear-gradient(315deg, rgba(239, 185, 74, 0.22), transparent 52%);
+  color: #fff;
+  min-height: 100%;
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+.auth-preview::before {
+  content: "";
+  position: absolute;
+  inset: 18px 18px auto auto;
+  width: 168px;
+  height: 168px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  transform: rotate(8deg);
+}
+
+.auth-preview-header,
+.auth-preview-grid,
+.auth-preview-ticket {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-preview-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.auth-preview-header span,
+.auth-preview-ticket span,
+.auth-preview-grid span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  font-weight: 720;
+  text-transform: uppercase;
+}
+
+.auth-preview-header strong {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 5px 9px;
+}
+
+.auth-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.auth-preview-grid div,
+.auth-preview-ticket {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  padding: 14px;
+  backdrop-filter: blur(12px);
+}
+
+.auth-preview-grid strong {
+  display: block;
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.auth-preview-ticket {
+  display: grid;
+  gap: 6px;
+}
+
+.auth-preview-ticket strong {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.auth-preview-ticket.urgent {
+  background: rgba(255, 242, 214, 0.14);
 }
 
 .brand {
@@ -92,20 +197,49 @@ button:disabled {
 }
 
 .brand-mark {
+  position: relative;
   width: 38px;
   height: 34px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  overflow: hidden;
+  border-radius: 12px;
   background:
     linear-gradient(135deg, #071b18 0%, #102b27 46%, #1d7a68 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 36%, 88% 50%, 100% 64%, 100% 100%, 0 100%, 0 64%, 12% 50%, 0 36%);
+  clip-path: polygon(8% 0, 20% 7%, 32% 0, 44% 7%, 56% 0, 68% 7%, 82% 0, 100% 16%, 92% 50%, 100% 84%, 82% 100%, 68% 93%, 56% 100%, 44% 93%, 32% 100%, 20% 93%, 8% 100%, 0 84%, 8% 50%, 0 16%);
   color: #f8fffc;
   font-size: 0.76rem;
   font-weight: 760;
   box-shadow:
     inset 0 -8px 18px rgba(255, 255, 255, 0.13),
     0 8px 18px rgba(17, 24, 22, 0.12);
+  animation: ticket-flow-mark 5.8s ease-in-out infinite;
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  inset: 6px auto 6px 8px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.34);
+}
+
+.brand:hover .brand-mark {
+  animation-duration: 2s;
+}
+
+@keyframes ticket-flow-mark {
+  0%,
+  100% {
+    transform: translateY(0) skewX(0deg);
+  }
+
+  35% {
+    transform: translateY(-1px) skewX(-2deg);
+  }
+
+  70% {
+    transform: translateY(1px) skewX(2deg);
+  }
 }
 
 .page-title {
@@ -225,14 +359,19 @@ textarea.control {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 264px minmax(0, 1fr);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(238, 244, 242, 0.92)),
+    repeating-linear-gradient(135deg, rgba(23, 107, 93, 0.035) 0 1px, transparent 1px 30px);
 }
 
 .sidebar {
   border-right: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.84);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(238, 246, 243, 0.9));
   color: var(--text);
   padding: 24px 18px;
   backdrop-filter: blur(14px);
+  box-shadow: 12px 0 34px rgba(20, 35, 32, 0.04);
 }
 
 .sidebar .brand {
@@ -277,7 +416,8 @@ textarea.control {
   gap: 14px;
   padding: 14px 28px;
   border-bottom: 1px solid var(--border);
-  background: rgba(251, 252, 252, 0.86);
+  background:
+    linear-gradient(90deg, rgba(251, 252, 252, 0.94), rgba(229, 244, 239, 0.68));
   backdrop-filter: blur(12px);
 }
 
@@ -287,7 +427,7 @@ textarea.control {
   gap: 9px;
   color: var(--muted);
   font-weight: 850;
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.88);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
@@ -321,7 +461,8 @@ textarea.control {
 }
 
 .card {
-  background: var(--surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 252, 252, 0.92));
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: var(--shadow-soft);
@@ -336,6 +477,7 @@ textarea.control {
   font-size: 2.25rem;
   line-height: 1;
   font-weight: 950;
+  color: #0e2b25;
 }
 
 .stat-label {
@@ -350,7 +492,8 @@ textarea.control {
   gap: 10px;
   align-items: end;
   margin-bottom: 18px;
-  background: rgba(255, 255, 255, 0.78);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 251, 249, 0.86));
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 14px;
@@ -730,17 +873,27 @@ textarea.control {
 }
 
 .landing-preview-logo {
+  position: relative;
   width: 38px;
   height: 34px;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border-radius: 10px;
   background:
     linear-gradient(135deg, #071b18 0%, #102b27 46%, #1d7a68 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 36%, 88% 50%, 100% 64%, 100% 100%, 0 100%, 0 64%, 12% 50%, 0 36%);
+  clip-path: polygon(8% 0, 20% 7%, 32% 0, 44% 7%, 56% 0, 68% 7%, 82% 0, 100% 16%, 92% 50%, 100% 84%, 82% 100%, 68% 93%, 56% 100%, 44% 93%, 32% 100%, 20% 93%, 8% 100%, 0 84%, 8% 50%, 0 16%);
   color: #fff;
   font-size: 0.76rem;
   font-weight: 760;
+  animation: ticket-flow-mark 5.8s ease-in-out infinite;
+}
+
+.landing-preview-logo::before {
+  content: "";
+  position: absolute;
+  inset: 6px auto 6px 8px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.34);
 }
 
 .landing-preview-content {
@@ -810,7 +963,6 @@ textarea.control {
   position: relative;
   height: 252px;
   margin-top: 16px;
-  perspective: 900px;
 }
 
 .landing-ticket-card {
@@ -826,7 +978,7 @@ textarea.control {
   background: rgba(255, 255, 255, 0.86);
   padding: 14px;
   box-shadow: 0 8px 18px rgba(20, 35, 32, 0.05);
-  transform-origin: 50% 12%;
+  transform-origin: 0 0;
   animation: landing-ticket-shuffle 14s cubic-bezier(0.68, 0, 0.22, 1) infinite;
   will-change: transform, opacity;
 }
@@ -891,41 +1043,41 @@ textarea.control {
   14% {
     opacity: 1;
     z-index: 5;
-    transform: translate3d(0, 0, 42px) scale(1) rotate(0deg);
+    transform: translateY(0) scale(1);
   }
 
   20%,
   34% {
     opacity: 0.9;
     z-index: 4;
-    transform: translate3d(13px, 48px, 20px) scale(0.965) rotate(1.2deg);
+    transform: translateY(48px) scale(0.965);
   }
 
   40%,
   54% {
     opacity: 0.72;
     z-index: 3;
-    transform: translate3d(-9px, 96px, 0) scale(0.93) rotate(-1deg);
+    transform: translateY(96px) scale(0.93);
   }
 
   60%,
   74% {
     opacity: 0.48;
     z-index: 2;
-    transform: translate3d(18px, 146px, -20px) scale(0.9) rotate(0.9deg);
+    transform: translateY(146px) scale(0.9);
   }
 
   80%,
   94% {
     opacity: 0;
     z-index: 1;
-    transform: translate3d(28px, 194px, -40px) scale(0.86) rotate(-1.4deg);
+    transform: translateY(194px) scale(0.86);
   }
 
   100% {
     opacity: 1;
     z-index: 5;
-    transform: translate3d(0, 0, 42px) scale(1) rotate(0deg);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -970,6 +1122,7 @@ textarea.control {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 88px 0;
+  scroll-margin-top: 92px;
 }
 
 .landing-split {
@@ -1099,6 +1252,15 @@ textarea.control {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .brand-mark,
+  .landing-preview-logo {
+    animation: none;
+  }
+
   .landing-ticket-card {
     animation: none;
   }
@@ -1110,12 +1272,12 @@ textarea.control {
 
   .landing-ticket-card:nth-child(2) {
     opacity: 0.82;
-    transform: translate3d(13px, 48px, 0) scale(0.965);
+    transform: translate3d(0, 48px, 0) scale(0.965);
   }
 
   .landing-ticket-card:nth-child(3) {
     opacity: 0.62;
-    transform: translate3d(-9px, 96px, 0) scale(0.93);
+    transform: translate3d(0, 96px, 0) scale(0.93);
   }
 
   .landing-ticket-card:nth-child(n + 4) {
@@ -1153,6 +1315,16 @@ textarea.control {
   .topbar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .auth-scene {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .auth-preview {
+    min-height: 260px;
+    order: -1;
   }
 
   .toolbar {
@@ -1246,6 +1418,14 @@ textarea.control {
 
   .auth-card {
     padding: 22px;
+  }
+
+  .auth-shell {
+    padding: 18px;
+  }
+
+  .auth-preview {
+    display: none;
   }
 
   .landing-nav {

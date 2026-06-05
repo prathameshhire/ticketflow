@@ -1,37 +1,64 @@
 <section class="auth-shell">
-  <div class="auth-card">
-    <div class="brand">
-      <span class="brand-mark">TF</span>
-      <span>TicketFlow</span>
+  <div class="auth-scene">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="brand-mark">TF</span>
+        <span>TicketFlow</span>
+      </div>
+      <h1 class="page-title" style="margin-top: 24px;">Create account</h1>
+      <p class="page-copy">Customer accounts can submit and track support tickets.</p>
+
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" class="control" type="text" autocomplete="name" formControlName="name">
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" class="control" type="email" autocomplete="email" formControlName="email">
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" class="control" type="password" autocomplete="new-password" formControlName="password">
+        </div>
+
+        <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+        <button class="button" type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Creating...' : 'Create account' }}
+        </button>
+      </form>
+
+      <p class="page-copy" style="margin-top: 18px;">
+        Already registered? <a class="link" routerLink="/login">Sign in</a>
+      </p>
     </div>
-    <h1 class="page-title" style="margin-top: 24px;">Create account</h1>
-    <p class="page-copy">Customer accounts can submit and track support tickets.</p>
 
-    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-      <div class="field">
-        <label for="name">Name</label>
-        <input id="name" class="control" type="text" autocomplete="name" formControlName="name">
+    <aside class="auth-preview" aria-hidden="true">
+      <div class="auth-preview-header">
+        <span>Customer view</span>
+        <strong>New ticket</strong>
       </div>
-
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" class="control" type="email" autocomplete="email" formControlName="email">
+      <div class="auth-preview-grid">
+        <div>
+          <strong>4h</strong>
+          <span>Urgent SLA</span>
+        </div>
+        <div>
+          <strong>24h</strong>
+          <span>Medium SLA</span>
+        </div>
       </div>
-
-      <div class="field">
-        <label for="password">Password</label>
-        <input id="password" class="control" type="password" autocomplete="new-password" formControlName="password">
+      <div class="auth-preview-ticket urgent">
+        <span>Priority</span>
+        <strong>Report an incident and track ownership</strong>
       </div>
-
-      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
-
-      <button class="button" type="submit" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'Creating...' : 'Create account' }}
-      </button>
-    </form>
-
-    <p class="page-copy" style="margin-top: 18px;">
-      Already registered? <a class="link" routerLink="/login">Sign in</a>
-    </p>
+      <div class="auth-preview-ticket">
+        <span>Updates</span>
+        <strong>Comments and alerts stay with the ticket</strong>
+      </div>
+    </aside>
   </div>
 </section>
