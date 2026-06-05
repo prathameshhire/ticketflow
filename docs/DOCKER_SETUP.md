@@ -4,7 +4,7 @@ Docker is for local development only. Production deployment should use Render fo
 
 ## Start PostgreSQL Only
 
-From `ticketflow-cloud`:
+From the repository root:
 
 ```bash
 docker compose up -d postgres
@@ -75,7 +75,7 @@ curl http://localhost:8080/api/health
 
 ## Run Backend In Docker
 
-From `ticketflow-cloud`:
+From the repository root:
 
 ```bash
 docker compose --profile backend up --build
@@ -91,7 +91,7 @@ BACKEND_PORT=18080 docker compose --profile backend up --build
 
 ## Run The Whole Stack Locally
 
-From `ticketflow-cloud`:
+From the repository root:
 
 ```bash
 docker compose --profile stack up --build

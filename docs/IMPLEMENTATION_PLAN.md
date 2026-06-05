@@ -41,7 +41,7 @@ Production:
 ## 3. Monorepo Structure
 
 ```text
-ticketflow-cloud/
+ticketflow/
   backend/
     pom.xml
     src/main/java/com/ticketflow/

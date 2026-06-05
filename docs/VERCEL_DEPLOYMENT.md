@@ -7,12 +7,12 @@ TicketFlow frontend deploys to Vercel as an Angular static site. Render remains 
 Create a Vercel project from this repository and use:
 
 ```text
-Root directory: ticketflow-cloud/frontend
+Root directory: frontend
 Build command: node scripts/generate-env.js && npm run build
 Output directory: dist/ticketflow-frontend/browser
 ```
 
-If `ticketflow-cloud` itself is imported as the repository root, use `frontend` as the Vercel root directory instead. The output directory comes from the Angular application builder configured in `frontend/angular.json`.
+The output directory comes from the Angular application builder configured in `frontend/angular.json`.
 
 ## Environment Variable
 

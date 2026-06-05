@@ -11,7 +11,7 @@
 H2 is the fastest local demo path.
 
 ```bash
-cd ticketflow-cloud/backend
+cd backend
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
@@ -42,7 +42,7 @@ jdbc:h2:mem:ticketflow
 ## Backend Tests
 
 ```bash
-cd ticketflow-cloud/backend
+cd backend
 mvn test
 ```
 
@@ -51,7 +51,6 @@ mvn test
 Docker Compose is for local development only.
 
 ```bash
-cd ticketflow-cloud
 docker compose up -d postgres
 ```
 
@@ -93,4 +92,3 @@ For production, keep `APP_SEED_ENABLED=false`.
 ## Frontend Notes
 
 Frontend implementation has not started yet. The API contract in [API.md](API.md) is intended for Angular service and model development.
-

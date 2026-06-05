@@ -66,7 +66,7 @@ Suggested placeholders:
 ## Repository Layout
 
 ```text
-ticketflow-cloud/
+ticketflow/
   backend/                 Spring Boot / Spring MVC API
   frontend/                Angular client for Vercel
   docs/                    Architecture, setup, API, and deployment docs
@@ -114,7 +114,7 @@ http://127.0.0.1:4200
 
 ### Docker PostgreSQL
 
-From `ticketflow-cloud`:
+From the repository root:
 
 ```bash
 docker compose up -d postgres
@@ -152,8 +152,8 @@ More detail: [docs/DOCKER_SETUP.md](docs/DOCKER_SETUP.md).
 
 | Target | Guide | Key Settings |
 | --- | --- | --- |
-| Render backend | [docs/RENDER_DEPLOYMENT.md](docs/RENDER_DEPLOYMENT.md) | Root `ticketflow-cloud/backend`, build `mvn clean package -DskipTests`, start `java -Xmx384m -jar target/*.jar` |
-| Vercel frontend | [docs/VERCEL_DEPLOYMENT.md](docs/VERCEL_DEPLOYMENT.md) | Root `ticketflow-cloud/frontend`, output `dist/ticketflow-frontend/browser`, env `NG_APP_API_URL` |
+| Render backend | [docs/RENDER_DEPLOYMENT.md](docs/RENDER_DEPLOYMENT.md) | Root `backend`, build `mvn clean package -DskipTests`, start `java -Xmx384m -jar target/*.jar` |
+| Vercel frontend | [docs/VERCEL_DEPLOYMENT.md](docs/VERCEL_DEPLOYMENT.md) | Root `frontend`, output `dist/ticketflow-frontend/browser`, env `NG_APP_API_URL` |
 | Neon PostgreSQL | [docs/NEON_SETUP.md](docs/NEON_SETUP.md) | External PostgreSQL JDBC URL, username, and password |
 
 Use [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) before publishing a demo build.

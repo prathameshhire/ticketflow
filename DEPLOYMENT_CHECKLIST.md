@@ -41,7 +41,7 @@ curl http://localhost:8080/api/health
 
 ## Backend Render Checklist
 
-- Render service root directory is `ticketflow-cloud/backend` for this GitHub repository.
+- Render service root directory is `backend`.
 - Build command is:
 
 ```bash
@@ -76,7 +76,7 @@ APP_SEED_ENABLED=false
 
 ## Frontend Vercel Checklist
 
-- Vercel project root directory is `ticketflow-cloud/frontend` for this GitHub repository.
+- Vercel project root directory is `frontend`.
 - Build command is:
 
 ```bash

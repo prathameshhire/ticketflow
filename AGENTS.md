@@ -3,7 +3,7 @@
 ## Repo Layout
 
 ```text
-ticketflow-cloud/
+ticketflow/
   backend/                 Spring Boot / Spring MVC API
   frontend/                Angular client for Vercel
   docs/                    Architecture, plans, and deployment notes
@@ -14,7 +14,7 @@ ticketflow-cloud/
 
 ## Backend Commands
 
-Run backend commands from `ticketflow-cloud/backend`.
+Run backend commands from `backend`.
 
 Planned commands:
 
@@ -33,7 +33,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=prod
 
 ## Frontend Commands
 
-Run frontend commands from `ticketflow-cloud/frontend`.
+Run frontend commands from `frontend`.
 
 Planned commands:
 
