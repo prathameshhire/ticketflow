@@ -7,11 +7,13 @@ TicketFlow backend deploys to Render as a lightweight Web Service. Production da
 Create a new Render Web Service from this repository.
 
 ```text
-Root directory: backend
+Root directory: ticketflow-cloud/backend
 Build command: mvn clean package -DskipTests
 Start command: java -Xmx384m -jar target/*.jar
 Health check path: /api/health
 ```
+
+If `ticketflow-cloud` itself is imported as the repository root, use `backend` as the Render root directory instead.
 
 Use Java 17. The backend Dockerfile is for local development and is not required for Render.
 
