@@ -41,6 +41,11 @@ a {
   text-decoration: none;
 }
 
+:focus-visible {
+  outline: 3px solid rgba(23, 107, 93, 0.35);
+  outline-offset: 3px;
+}
+
 button,
 input,
 select,
@@ -183,6 +188,7 @@ textarea.control {
   background: #eef3f2;
   color: var(--text);
   box-shadow: none;
+  border: 1px solid rgba(191, 208, 204, 0.92);
 }
 
 .button.secondary:hover {
@@ -464,6 +470,24 @@ textarea.control {
   background: rgba(255, 255, 255, 0.62);
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 30;
+  top: 12px;
+  left: 12px;
+  border-radius: 8px;
+  background: #101b1a;
+  color: #fff;
+  font-weight: 760;
+  padding: 10px 14px;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 .landing-page {
   min-height: 100vh;
   overflow: hidden;
@@ -481,6 +505,7 @@ textarea.control {
   align-items: center;
   gap: 18px;
   margin: 0 auto;
+  border-bottom: 1px solid rgba(220, 229, 227, 0.72);
 }
 
 .landing-brand {
@@ -496,7 +521,7 @@ textarea.control {
 
 .landing-nav-links a {
   border-radius: 8px;
-  color: #53635f;
+  color: #40514d;
   font-weight: 680;
   padding: 9px 12px;
 }
@@ -512,6 +537,11 @@ textarea.control {
   white-space: nowrap;
 }
 
+.landing-page a:focus-visible,
+.landing-page .button:focus-visible {
+  outline-color: rgba(23, 107, 93, 0.55);
+}
+
 .landing-hero {
   position: relative;
   width: min(1180px, calc(100% - 32px));
@@ -519,7 +549,7 @@ textarea.control {
   display: grid;
   align-items: center;
   margin: 0 auto;
-  padding: 42px 0 38px;
+  padding: 44px 0 40px;
 }
 
 .landing-hero::before {
@@ -546,7 +576,7 @@ textarea.control {
 .landing-kicker {
   margin: 0 0 14px;
   color: var(--primary);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 720;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -564,7 +594,7 @@ textarea.control {
 .landing-hero-copy > p:not(.landing-kicker) {
   max-width: 480px;
   margin: 18px 0 0;
-  color: #4f615d;
+  color: #334541;
   font-size: 1.14rem;
   font-weight: 420;
 }
@@ -580,6 +610,10 @@ textarea.control {
 .landing-secondary {
   min-height: 48px;
   padding-inline: 20px;
+}
+
+.landing-secondary {
+  background: rgba(255, 255, 255, 0.82);
 }
 
 .landing-page .button {
@@ -641,7 +675,7 @@ textarea.control {
   gap: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 14px;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .landing-window-bar span {
@@ -684,7 +718,7 @@ textarea.control {
 
 .landing-preview-sidebar span {
   border-radius: 8px;
-  color: #52635f;
+  color: #394a46;
   font-size: 0.78rem;
   font-weight: 680;
   padding: 9px 10px;
@@ -721,7 +755,7 @@ textarea.control {
 }
 
 .landing-mini-label {
-  color: var(--muted);
+  color: #445653;
   font-size: 0.72rem;
   font-weight: 720;
   letter-spacing: 0;
@@ -748,7 +782,7 @@ textarea.control {
 .landing-stat-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
   margin-top: 20px;
 }
 
@@ -767,7 +801,7 @@ textarea.control {
 }
 
 .landing-stat-row span {
-  color: var(--muted);
+  color: #455955;
   font-size: 0.78rem;
   font-weight: 650;
 }
@@ -798,7 +832,7 @@ textarea.control {
 }
 
 .landing-ticket-card span {
-  color: var(--muted);
+  color: #455955;
   font-size: 0.74rem;
   font-weight: 720;
   text-transform: uppercase;
@@ -905,7 +939,7 @@ textarea.control {
   width: min(1180px, calc(100% - 32px));
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(360px, 560px);
-  gap: 24px;
+  gap: 32px;
   align-items: center;
   margin: 0 auto;
   padding: 18px 0;
@@ -913,7 +947,7 @@ textarea.control {
 
 .landing-band p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.88);
   font-weight: 640;
 }
 
@@ -925,7 +959,7 @@ textarea.control {
 }
 
 .landing-band .landing-proof-item span {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .landing-band .landing-proof-item strong {
@@ -935,13 +969,13 @@ textarea.control {
 .landing-section {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 86px 0;
+  padding: 88px 0;
 }
 
 .landing-split {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
-  gap: 46px;
+  gap: 56px;
   align-items: center;
 }
 
@@ -959,13 +993,14 @@ textarea.control {
 
 .landing-section-header > p:not(.landing-kicker) {
   margin: 16px 0 0;
-  color: var(--muted);
+  color: #455955;
   font-size: 1.06rem;
+  max-width: 620px;
 }
 
 .landing-quote-grid {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .landing-quote-grid blockquote {
@@ -984,8 +1019,8 @@ textarea.control {
 .landing-step-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 30px;
+  gap: 16px;
+  margin-top: 34px;
 }
 
 .landing-feature-card,
@@ -1030,7 +1065,7 @@ textarea.control {
 .landing-step p,
 .landing-final p {
   margin: 12px 0 0;
-  color: var(--muted);
+  color: #455955;
 }
 
 .landing-workflow {

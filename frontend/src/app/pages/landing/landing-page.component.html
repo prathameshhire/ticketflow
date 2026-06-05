@@ -1,7 +1,9 @@
-<main class="landing-page">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<main id="main-content" class="landing-page">
   <header class="landing-nav" aria-label="TicketFlow landing navigation">
     <a class="brand landing-brand" routerLink="/" aria-label="TicketFlow home">
-      <span class="brand-mark">TF</span>
+      <span class="brand-mark" aria-hidden="true">TF</span>
       <span>TicketFlow</span>
     </a>
 
@@ -14,10 +16,10 @@
     <a class="button landing-nav-cta" routerLink="/register">Get started</a>
   </header>
 
-  <section class="landing-hero">
+  <section class="landing-hero" aria-labelledby="landing-title">
     <div class="landing-hero-copy">
       <p class="landing-kicker">Incident ticketing for portfolio-ready teams</p>
-      <h1>Incident tickets, finally organized.</h1>
+      <h1 id="landing-title">Incident tickets, finally organized.</h1>
       <p>
         TicketFlow gives customers, agents, and admins a clean place to create incidents,
         watch SLA risk, assign ownership, and close the loop.
@@ -32,7 +34,7 @@
 
     <div class="landing-visual" aria-label="TicketFlow product preview">
       <div class="landing-window">
-        <div class="landing-window-bar">
+        <div class="landing-window-bar" aria-hidden="true">
           <span></span>
           <span></span>
           <span></span>
@@ -41,7 +43,7 @@
 
         <div class="landing-dashboard-preview">
           <aside class="landing-preview-sidebar">
-            <div class="landing-preview-logo">TF</div>
+            <div class="landing-preview-logo" aria-hidden="true">TF</div>
             <span>Dashboard</span>
             <span>Tickets</span>
             <span>Alerts</span>
