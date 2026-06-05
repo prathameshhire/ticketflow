@@ -1,0 +1,160 @@
+<main class="landing-page">
+  <header class="landing-nav" aria-label="TicketFlow landing navigation">
+    <a class="brand landing-brand" routerLink="/" aria-label="TicketFlow home">
+      <span class="brand-mark">TF</span>
+      <span>TicketFlow</span>
+    </a>
+
+    <nav class="landing-nav-links" aria-label="Landing sections">
+      <a href="#features">Features</a>
+      <a href="#workflow">Workflow</a>
+      <a routerLink="/login">Sign in</a>
+    </nav>
+
+    <a class="button landing-nav-cta" routerLink="/register">Get started</a>
+  </header>
+
+  <section class="landing-hero">
+    <div class="landing-hero-copy">
+      <p class="landing-kicker">Incident ticketing for portfolio-ready teams</p>
+      <h1>Incident tickets, finally organized.</h1>
+      <p>
+        TicketFlow gives customers, agents, and admins a clean place to create incidents,
+        watch SLA risk, assign ownership, and close the loop.
+      </p>
+
+      <div class="landing-actions">
+        <a class="button landing-primary" routerLink="/register">Start the demo</a>
+        <a class="button secondary landing-secondary" routerLink="/login">Sign in</a>
+      </div>
+
+    </div>
+
+    <div class="landing-visual" aria-label="TicketFlow product preview">
+      <div class="landing-window">
+        <div class="landing-window-bar">
+          <span></span>
+          <span></span>
+          <span></span>
+          <strong>ticketflow.app/dashboard</strong>
+        </div>
+
+        <div class="landing-dashboard-preview">
+          <aside class="landing-preview-sidebar">
+            <div class="landing-preview-logo">TF</div>
+            <span>Dashboard</span>
+            <span>Tickets</span>
+            <span>Alerts</span>
+            <span>Analytics</span>
+          </aside>
+
+          <section class="landing-preview-content">
+            <div class="landing-preview-header">
+              <div>
+                <span class="landing-mini-label">Live queue</span>
+                <h2>Operations desk</h2>
+              </div>
+              <span class="landing-live-dot">Live</span>
+            </div>
+
+            <div class="landing-stat-row">
+              <div>
+                <strong>42</strong>
+                <span>Total</span>
+              </div>
+              <div>
+                <strong>9</strong>
+                <span>Open</span>
+              </div>
+              <div>
+                <strong>3</strong>
+                <span>SLA risk</span>
+              </div>
+            </div>
+
+            <div class="landing-ticket-stack">
+              <article class="landing-ticket-card" *ngFor="let ticket of heroTickets">
+                <div>
+                  <span>{{ ticket.company }}</span>
+                  <h3>{{ ticket.title }}</h3>
+                </div>
+                <div class="landing-ticket-meta">
+                  <span>{{ ticket.priority }}</span>
+                  <span>{{ ticket.status }}</span>
+                  <strong>{{ ticket.due }}</strong>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-band">
+    <div class="landing-band-inner">
+      <p>Built for incident intake, agent ownership, async alerts, SLA tracking, and dashboard reporting.</p>
+      <div class="landing-proof" aria-label="TicketFlow demo metrics">
+        <div class="landing-proof-item" *ngFor="let metric of metrics">
+          <strong>{{ metric.value }}</strong>
+          <span>{{ metric.label }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-section landing-split">
+    <div>
+      <p class="landing-kicker">The problem</p>
+      <h2>Tickets are everywhere and accountability is nowhere.</h2>
+    </div>
+    <div class="landing-quote-grid">
+      <blockquote>"Who owns this customer issue?"</blockquote>
+      <blockquote>"Did anyone tell the agent?"</blockquote>
+      <blockquote>"Which tickets are about to miss SLA?"</blockquote>
+    </div>
+  </section>
+
+  <section id="features" class="landing-section">
+    <div class="landing-section-header">
+      <p class="landing-kicker">What you get</p>
+      <h2>A focused ticketing workspace that feels real.</h2>
+      <p>
+        The app is intentionally lightweight for cloud deployment while still showing the backend
+        workflows recruiters expect to see.
+      </p>
+    </div>
+
+    <div class="landing-feature-grid">
+      <article class="landing-feature-card" *ngFor="let feature of features">
+        <span>{{ feature.eyebrow }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.copy }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="workflow" class="landing-section landing-workflow">
+    <div class="landing-section-header">
+      <p class="landing-kicker">How it works</p>
+      <h2>Three steps. That's the flow.</h2>
+    </div>
+
+    <div class="landing-step-grid">
+      <article class="landing-step" *ngFor="let step of steps">
+        <strong>{{ step.number }}</strong>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.copy }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="landing-section landing-final">
+    <h2>Give your incidents a better home.</h2>
+    <p>Use the seeded demo users or create a new account to explore the full ticket flow.</p>
+    <div class="landing-actions">
+      <a class="button landing-primary" routerLink="/register">Create account</a>
+      <a class="button secondary landing-secondary" routerLink="/login">Use demo login</a>
+    </div>
+  </section>
+</main>

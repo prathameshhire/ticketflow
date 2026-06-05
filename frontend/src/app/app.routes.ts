@@ -4,6 +4,7 @@ import { authGuard } from './core/auth.guard';
 import { AppLayoutComponent } from './layout/app-layout.component';
 import { AlertsPageComponent } from './pages/alerts/alerts-page.component';
 import { DashboardPageComponent } from './pages/dashboard/dashboard-page.component';
+import { LandingPageComponent } from './pages/landing/landing-page.component';
 import { LoginPageComponent } from './pages/login/login-page.component';
 import { RegisterPageComponent } from './pages/register/register-page.component';
 import { TicketCreatePageComponent } from './pages/ticket-create/ticket-create-page.component';
@@ -11,6 +12,7 @@ import { TicketDetailPageComponent } from './pages/ticket-detail/ticket-detail-p
 import { TicketListPageComponent } from './pages/ticket-list/ticket-list-page.component';
 
 export const routes: Routes = [
+  { path: '', pathMatch: 'full', component: LandingPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   {
@@ -19,7 +21,6 @@ export const routes: Routes = [
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', component: DashboardPageComponent },
       { path: 'tickets', component: TicketListPageComponent },
       { path: 'tickets/new', component: TicketCreatePageComponent },
@@ -27,5 +28,5 @@ export const routes: Routes = [
       { path: 'alerts', component: AlertsPageComponent }
     ]
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: '' }
 ];
