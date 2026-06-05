@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 12 124 64" role="img" aria-label="TicketFlow TF ticket logo">
+  <defs>
+    <linearGradient id="ticketflow-ticket-fill" x1="15" y1="18" x2="125" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071b18"/>
+      <stop offset="0.52" stop-color="#12332d"/>
+      <stop offset="1" stop-color="#1d7a68"/>
+    </linearGradient>
+    <linearGradient id="ticketflow-ticket-shine" x1="28" y1="17" x2="108" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    fill="url(#ticketflow-ticket-fill)"
+    d="M17 26 C26 15 36 34 47 24 C58 14 68 35 80 25 C92 15 103 33 114 23 C122 28 124 33 120 39 C114 42 114 46 120 49 C124 55 122 60 114 65 C103 55 92 73 80 63 C68 53 58 74 47 64 C36 54 26 73 17 62 C9 55 16 49 25 45 C31 42 31 37 25 34 C16 31 9 25 17 26 Z"/>
+  <path
+    fill="url(#ticketflow-ticket-shine)"
+    d="M23 27 C31 21 39 34 49 27 C59 19 68 35 80 28 C91 21 101 32 111 27 C116 31 116 34 112 38 C105 43 105 46 112 51 C116 55 116 58 111 61 C101 56 91 68 80 60 C68 53 59 69 49 61 C39 54 31 67 23 60 C18 55 22 50 29 46 C35 42 35 37 29 34 C22 31 18 28 23 27 Z"/>
+  <path
+    d="M39 25 L39 63"
+    fill="none"
+    stroke="#ffffff"
+    stroke-opacity="0.36"
+    stroke-width="2.6"
+    stroke-linecap="round"
+    stroke-dasharray="4 7"/>
+  <text
+    x="75"
+    y="52"
+    fill="#ffffff"
+    font-family="Inter, Segoe UI, Arial, sans-serif"
+    font-size="27"
+    font-weight="800"
+    text-anchor="middle"
+    letter-spacing="0">TF</text>
+</svg>
