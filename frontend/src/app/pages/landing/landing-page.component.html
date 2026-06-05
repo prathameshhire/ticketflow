@@ -72,8 +72,8 @@
               </div>
             </div>
 
-            <div class="landing-ticket-stack">
-              <article class="landing-ticket-card" *ngFor="let ticket of heroTickets">
+            <div class="landing-ticket-deck" aria-label="Shuffling incident cards">
+              <article class="landing-ticket-card" *ngFor="let ticket of heroTickets; let i = index">
                 <div>
                   <span>{{ ticket.company }}</span>
                   <h3>{{ ticket.title }}</h3>

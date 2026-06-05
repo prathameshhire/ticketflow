@@ -82,20 +82,25 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 900;
+  font-weight: 760;
   letter-spacing: 0;
 }
 
 .brand-mark {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 34px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  background: #111816;
-  color: #fff;
-  font-weight: 900;
-  box-shadow: inset 0 -8px 18px rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, #071b18 0%, #102b27 46%, #1d7a68 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 36%, 88% 50%, 100% 64%, 100% 100%, 0 100%, 0 64%, 12% 50%, 0 36%);
+  color: #f8fffc;
+  font-size: 0.76rem;
+  font-weight: 760;
+  box-shadow:
+    inset 0 -8px 18px rgba(255, 255, 255, 0.13),
+    0 8px 18px rgba(17, 24, 22, 0.12);
 }
 
 .page-title {
@@ -464,6 +469,8 @@ textarea.control {
   overflow: hidden;
   background:
     linear-gradient(180deg, #fbfcf7 0%, #eff7f4 38%, #f8fbfb 100%);
+  font-family: "Segoe UI Variable", "Aptos", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 450;
 }
 
 .landing-nav {
@@ -490,7 +497,7 @@ textarea.control {
 .landing-nav-links a {
   border-radius: 8px;
   color: #53635f;
-  font-weight: 850;
+  font-weight: 680;
   padding: 9px 12px;
 }
 
@@ -540,8 +547,8 @@ textarea.control {
   margin: 0 0 14px;
   color: var(--primary);
   font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0.08em;
+  font-weight: 720;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -550,7 +557,7 @@ textarea.control {
   margin: 0;
   font-size: clamp(3.25rem, 7vw, 5.75rem);
   line-height: 0.9;
-  font-weight: 950;
+  font-weight: 680;
   letter-spacing: 0;
 }
 
@@ -558,7 +565,8 @@ textarea.control {
   max-width: 480px;
   margin: 18px 0 0;
   color: #4f615d;
-  font-size: 1.18rem;
+  font-size: 1.14rem;
+  font-weight: 420;
 }
 
 .landing-actions {
@@ -572,6 +580,10 @@ textarea.control {
 .landing-secondary {
   min-height: 48px;
   padding-inline: 20px;
+}
+
+.landing-page .button {
+  font-weight: 760;
 }
 
 .landing-proof {
@@ -596,13 +608,13 @@ textarea.control {
 .landing-proof-item strong {
   font-size: 1.55rem;
   line-height: 1;
-  font-weight: 950;
+  font-weight: 760;
 }
 
 .landing-proof-item span {
   color: var(--muted);
   font-size: 0.86rem;
-  font-weight: 800;
+  font-weight: 620;
 }
 
 .landing-visual {
@@ -650,7 +662,7 @@ textarea.control {
 .landing-window-bar strong {
   margin-left: 8px;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 680;
 }
 
 .landing-dashboard-preview {
@@ -674,7 +686,7 @@ textarea.control {
   border-radius: 8px;
   color: #52635f;
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 680;
   padding: 9px 10px;
 }
 
@@ -685,13 +697,16 @@ textarea.control {
 
 .landing-preview-logo {
   width: 38px;
-  height: 38px;
+  height: 34px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  background: var(--text);
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, #071b18 0%, #102b27 46%, #1d7a68 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 36%, 88% 50%, 100% 64%, 100% 100%, 0 100%, 0 64%, 12% 50%, 0 36%);
   color: #fff;
-  font-weight: 950;
+  font-size: 0.76rem;
+  font-weight: 760;
 }
 
 .landing-preview-content {
@@ -708,8 +723,8 @@ textarea.control {
 .landing-mini-label {
   color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.08em;
+  font-weight: 720;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -717,6 +732,7 @@ textarea.control {
   margin: 2px 0 0;
   font-size: 1.7rem;
   line-height: 1;
+  font-weight: 680;
 }
 
 .landing-live-dot {
@@ -725,7 +741,7 @@ textarea.control {
   background: #dff8ed;
   color: var(--success);
   font-size: 0.74rem;
-  font-weight: 950;
+  font-weight: 720;
   padding: 6px 10px;
 }
 
@@ -747,36 +763,44 @@ textarea.control {
   display: block;
   font-size: 1.6rem;
   line-height: 1;
+  font-weight: 760;
 }
 
 .landing-stat-row span {
   color: var(--muted);
   font-size: 0.78rem;
-  font-weight: 850;
+  font-weight: 650;
 }
 
-.landing-ticket-stack {
-  display: grid;
-  gap: 10px;
+.landing-ticket-deck {
+  position: relative;
+  height: 252px;
   margin-top: 16px;
+  perspective: 900px;
 }
 
 .landing-ticket-card {
+  position: absolute;
+  inset: 0 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
+  min-height: 104px;
   border: 1px solid rgba(203, 218, 215, 0.9);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
   padding: 14px;
   box-shadow: 0 8px 18px rgba(20, 35, 32, 0.05);
+  transform-origin: 50% 12%;
+  animation: landing-ticket-shuffle 14s cubic-bezier(0.68, 0, 0.22, 1) infinite;
+  will-change: transform, opacity;
 }
 
 .landing-ticket-card span {
   color: var(--muted);
   font-size: 0.74rem;
-  font-weight: 950;
+  font-weight: 720;
   text-transform: uppercase;
 }
 
@@ -784,6 +808,7 @@ textarea.control {
   margin: 4px 0 0;
   font-size: 0.98rem;
   line-height: 1.25;
+  font-weight: 720;
 }
 
 .landing-ticket-meta {
@@ -803,7 +828,71 @@ textarea.control {
 .landing-ticket-meta strong {
   color: var(--danger);
   font-size: 0.78rem;
+  font-weight: 720;
   white-space: nowrap;
+}
+
+.landing-ticket-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.landing-ticket-card:nth-child(2) {
+  animation-delay: -2.8s;
+}
+
+.landing-ticket-card:nth-child(3) {
+  animation-delay: -5.6s;
+}
+
+.landing-ticket-card:nth-child(4) {
+  animation-delay: -8.4s;
+}
+
+.landing-ticket-card:nth-child(5) {
+  animation-delay: -11.2s;
+}
+
+@keyframes landing-ticket-shuffle {
+  0%,
+  14% {
+    opacity: 1;
+    z-index: 5;
+    transform: translate3d(0, 0, 42px) scale(1) rotate(0deg);
+  }
+
+  20%,
+  34% {
+    opacity: 0.9;
+    z-index: 4;
+    transform: translate3d(13px, 48px, 20px) scale(0.965) rotate(1.2deg);
+  }
+
+  40%,
+  54% {
+    opacity: 0.72;
+    z-index: 3;
+    transform: translate3d(-9px, 96px, 0) scale(0.93) rotate(-1deg);
+  }
+
+  60%,
+  74% {
+    opacity: 0.48;
+    z-index: 2;
+    transform: translate3d(18px, 146px, -20px) scale(0.9) rotate(0.9deg);
+  }
+
+  80%,
+  94% {
+    opacity: 0;
+    z-index: 1;
+    transform: translate3d(28px, 194px, -40px) scale(0.86) rotate(-1.4deg);
+  }
+
+  100% {
+    opacity: 1;
+    z-index: 5;
+    transform: translate3d(0, 0, 42px) scale(1) rotate(0deg);
+  }
 }
 
 .landing-band {
@@ -825,7 +914,7 @@ textarea.control {
 .landing-band p {
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
-  font-weight: 850;
+  font-weight: 640;
 }
 
 .landing-band .landing-proof-item {
@@ -860,7 +949,7 @@ textarea.control {
   margin: 0;
   font-size: clamp(2.1rem, 4.8vw, 4.6rem);
   line-height: 0.96;
-  font-weight: 950;
+  font-weight: 680;
   letter-spacing: 0;
 }
 
@@ -887,7 +976,7 @@ textarea.control {
   box-shadow: var(--shadow-soft);
   color: #31423e;
   font-size: clamp(1rem, 2.2vw, 1.35rem);
-  font-weight: 900;
+  font-weight: 680;
   padding: 20px;
 }
 
@@ -914,7 +1003,7 @@ textarea.control {
   background: #e8eefb;
   color: var(--accent);
   font-size: 0.74rem;
-  font-weight: 950;
+  font-weight: 720;
   padding: 5px 9px;
   text-transform: uppercase;
 }
@@ -934,6 +1023,7 @@ textarea.control {
   margin: 18px 0 0;
   font-size: 1.35rem;
   line-height: 1.08;
+  font-weight: 720;
 }
 
 .landing-feature-card p,
@@ -950,7 +1040,7 @@ textarea.control {
 .landing-step strong {
   color: var(--primary);
   font-size: 0.86rem;
-  font-weight: 950;
+  font-weight: 720;
 }
 
 .landing-final {
@@ -971,6 +1061,31 @@ textarea.control {
 
 .landing-final .landing-actions {
   justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-ticket-card {
+    animation: none;
+  }
+
+  .landing-ticket-card:nth-child(1) {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .landing-ticket-card:nth-child(2) {
+    opacity: 0.82;
+    transform: translate3d(13px, 48px, 0) scale(0.965);
+  }
+
+  .landing-ticket-card:nth-child(3) {
+    opacity: 0.62;
+    transform: translate3d(-9px, 96px, 0) scale(0.93);
+  }
+
+  .landing-ticket-card:nth-child(n + 4) {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 960px) {

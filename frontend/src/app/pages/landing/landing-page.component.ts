@@ -30,6 +30,20 @@ export class LandingPageComponent {
       priority: 'MEDIUM',
       status: 'RESOLVED',
       due: 'Met SLA'
+    },
+    {
+      company: 'QuantumCart',
+      title: 'Inventory sync job stalled overnight',
+      priority: 'HIGH',
+      status: 'IN PROGRESS',
+      due: '6h 05m'
+    },
+    {
+      company: 'StudioNine',
+      title: 'Login webhook retries spiking',
+      priority: 'LOW',
+      status: 'OPEN',
+      due: '2d 18h'
     }
   ];
 
