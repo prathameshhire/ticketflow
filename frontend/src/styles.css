@@ -630,6 +630,8 @@ textarea.control {
 }
 
 .dashboard-chart-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   min-height: 306px;
 }
 
@@ -659,7 +661,8 @@ textarea.control {
 
 .dashboard-chart {
   position: relative;
-  min-height: 228px;
+  height: 100%;
+  min-height: 330px;
   overflow: hidden;
   border-radius: 8px;
   background:
@@ -806,19 +809,35 @@ textarea.control {
 }
 
 .priority-urgent {
-  background: var(--danger);
+  background: #ff7a5c;
 }
 
 .priority-high {
-  background: var(--warning);
+  background: #f4c542;
 }
 
 .priority-medium {
-  background: var(--accent);
+  background: #5aa9ff;
 }
 
 .priority-low {
-  background: var(--success);
+  background: #2fd3a6;
+}
+
+.priority-row-urgent > div span {
+  background: #ff7a5c;
+}
+
+.priority-row-high > div span {
+  background: #f4c542;
+}
+
+.priority-row-medium > div span {
+  background: #5aa9ff;
+}
+
+.priority-row-low > div span {
+  background: #2fd3a6;
 }
 
 .dashboard-status-row {

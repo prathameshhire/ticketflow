@@ -95,7 +95,7 @@ export class DashboardPageComponent implements OnInit {
     const high = urgent + this.priorityShare(summary, 'HIGH');
     const medium = high + this.priorityShare(summary, 'MEDIUM');
 
-    return `conic-gradient(#bc3d35 0 ${urgent}%, #a86600 ${urgent}% ${high}%, #315fbd ${high}% ${medium}%, #147a52 ${medium}% 100%)`;
+    return `conic-gradient(#ff7a5c 0 ${urgent}%, #f4c542 ${urgent}% ${high}%, #5aa9ff ${high}% ${medium}%, #2fd3a6 ${medium}% 100%)`;
   }
 
   private share(value: number, total: number): number {

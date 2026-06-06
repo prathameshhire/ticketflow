@@ -81,7 +81,7 @@
         </div>
 
         <div class="dashboard-breakdown-list">
-          <div class="dashboard-breakdown-row" *ngFor="let priority of priorities">
+          <div class="dashboard-breakdown-row priority-row-{{ priority.toLowerCase() }}" *ngFor="let priority of priorities">
             <span class="priority-dot priority-{{ priority.toLowerCase() }}"></span>
             <strong>{{ priority }}</strong>
             <em>{{ data.ticketsByPriority[priority] || 0 }}</em>
