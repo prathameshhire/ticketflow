@@ -731,8 +731,6 @@ textarea.control {
 .dashboard-donut {
   width: 142px;
   aspect-ratio: 1;
-  display: grid;
-  place-items: center;
   border-radius: 999px;
   position: relative;
 }
@@ -745,20 +743,30 @@ textarea.control {
   background: #fbfbf8;
 }
 
-.dashboard-donut span,
-.dashboard-donut small {
-  position: relative;
+.dashboard-donut-label {
+  position: absolute;
+  inset: 32px;
   z-index: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-radius: 999px;
+  text-align: center;
 }
 
-.dashboard-donut span {
+.dashboard-donut-label span {
+  display: block;
   font-size: 1.8rem;
+  line-height: 1;
   font-weight: 850;
 }
 
-.dashboard-donut small {
-  margin-top: 36px;
+.dashboard-donut-label small {
+  display: block;
+  margin-top: 4px;
   color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1;
   font-weight: 700;
 }
 

@@ -75,8 +75,10 @@
 
         <div class="dashboard-donut-wrap">
           <div class="dashboard-donut" [style.background]="priorityDonut(data)">
-            <span>{{ data.totalTickets }}</span>
-            <small>tickets</small>
+            <div class="dashboard-donut-label" [attr.aria-label]="data.totalTickets + ' tickets'">
+              <span>{{ data.totalTickets }}</span>
+              <small>tickets</small>
+            </div>
           </div>
         </div>
 
