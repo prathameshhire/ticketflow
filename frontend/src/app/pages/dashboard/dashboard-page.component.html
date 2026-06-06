@@ -1,4 +1,4 @@
-<section class="page-header">
+<section class="page-header dashboard-heading">
   <div>
     <h1 class="page-title">Dashboard</h1>
     <p class="page-copy">Ticket volume, SLA risk, and agent workload.</p>
@@ -9,82 +9,133 @@
 <div class="empty" *ngIf="isLoading">Loading dashboard...</div>
 
 <ng-container *ngIf="!isLoading && summary as data">
-  <section class="grid stats">
-    <article class="card">
-      <div class="stat-value">{{ data.totalTickets }}</div>
-      <div class="stat-label">Total</div>
-    </article>
-    <article class="card">
-      <div class="stat-value">{{ data.openCount }}</div>
-      <div class="stat-label">Open</div>
-    </article>
-    <article class="card">
-      <div class="stat-value">{{ data.inProgressCount }}</div>
-      <div class="stat-label">In Progress</div>
-    </article>
-    <article class="card">
-      <div class="stat-value">{{ data.resolvedCount }}</div>
-      <div class="stat-label">Resolved</div>
-    </article>
-    <article class="card">
-      <div class="stat-value">{{ data.overdueSlaCount }}</div>
-      <div class="stat-label">Overdue SLA</div>
-    </article>
-  </section>
-
-  <section class="grid two" style="margin-top: 16px;">
-    <article class="card">
-      <h2 class="page-title" style="font-size: 1.1rem;">By Priority</h2>
-      <div class="meta-list" style="margin-top: 14px;">
-        <div class="meta-item" *ngFor="let priority of priorities">
-          <div class="meta-label">{{ priority }}</div>
-          <div class="meta-value">{{ data.ticketsByPriority[priority] || 0 }}</div>
-        </div>
+  <section class="dashboard-board">
+    <div class="dashboard-command" aria-label="Dashboard shortcuts">
+      <div class="dashboard-tabs">
+        <span class="active">Overview</span>
+        <span>SLA</span>
+        <span>Agents</span>
+        <span>Reports</span>
       </div>
-    </article>
 
-    <article class="card">
-      <h2 class="page-title" style="font-size: 1.1rem;">By Status</h2>
-      <div class="meta-list" style="margin-top: 14px;">
-        <div class="meta-item" *ngFor="let status of statuses">
-          <div class="meta-label">{{ status }}</div>
-          <div class="meta-value">{{ data.ticketsByStatus[status] || 0 }}</div>
-        </div>
+      <div class="dashboard-search" aria-hidden="true">
+        <span></span>
+        <strong>Search incidents</strong>
       </div>
-    </article>
-  </section>
 
-  <section class="card" style="margin-top: 16px;">
-    <div class="page-header" style="margin-bottom: 8px;">
-      <div>
-        <h2 class="page-title" style="font-size: 1.1rem;">Agent Workload</h2>
-        <p class="page-copy">Average resolution: {{ data.averageResolutionTimeHours | number:'1.1-1' }} hours</p>
-      </div>
+      <a class="dashboard-create" routerLink="/tickets" aria-label="Open tickets">+</a>
     </div>
 
-    <div class="empty" *ngIf="data.agentWorkload.length === 0">No assigned agent workload yet.</div>
+    <section class="dashboard-metrics" aria-label="Dashboard metrics">
+      <article class="dashboard-metric-card" [class.highlight]="metric.highlight" *ngFor="let metric of metricCards(data)">
+        <div>
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+          <small>{{ metric.caption }}</small>
+        </div>
 
-    <div class="table-wrap" *ngIf="data.agentWorkload.length > 0">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Agent</th>
-            <th>Email</th>
-            <th>Assigned</th>
-            <th>Open</th>
-            <th>In Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let agent of data.agentWorkload">
-            <td>{{ agent.agentName }}</td>
-            <td>{{ agent.agentEmail }}</td>
-            <td>{{ agent.totalAssigned }}</td>
-            <td>{{ agent.openCount }}</td>
-            <td>{{ agent.inProgressCount }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <div class="dashboard-spark" aria-hidden="true">
+          <span *ngFor="let bar of metric.spark" [style.height.%]="bar"></span>
+        </div>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="dashboard-panel dashboard-chart-panel">
+        <div class="dashboard-panel-header">
+          <div>
+            <span>Ticket flow</span>
+            <h2>Weekly intake vs resolution</h2>
+          </div>
+          <button type="button">Monthly</button>
+        </div>
+
+        <div class="dashboard-chart" aria-label="Ticket flow chart">
+          <div class="dashboard-chart-grid"></div>
+          <svg viewBox="0 0 640 220" preserveAspectRatio="none" aria-hidden="true">
+            <path class="dashboard-chart-goal" d="M0 80 C80 125 130 35 205 88 C285 142 315 155 390 108 C470 57 525 150 640 95" />
+            <path class="dashboard-chart-line" d="M0 150 C70 75 116 176 190 112 C255 58 320 76 372 132 C438 200 492 46 560 86 C600 111 612 166 640 125" />
+          </svg>
+          <div class="dashboard-tooltip">
+            <span>Current summary</span>
+            <strong>{{ data.openCount + data.inProgressCount }} active tickets</strong>
+            <small>{{ data.resolvedCount + data.closedCount }} completed</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-panel dashboard-breakdown-panel">
+        <div class="dashboard-panel-header">
+          <div>
+            <span>Priority mix</span>
+            <h2>Risk breakdown</h2>
+          </div>
+          <button type="button">...</button>
+        </div>
+
+        <div class="dashboard-donut-wrap">
+          <div class="dashboard-donut" [style.background]="priorityDonut(data)">
+            <span>{{ data.totalTickets }}</span>
+            <small>tickets</small>
+          </div>
+        </div>
+
+        <div class="dashboard-breakdown-list">
+          <div class="dashboard-breakdown-row" *ngFor="let priority of priorities">
+            <span class="priority-dot priority-{{ priority.toLowerCase() }}"></span>
+            <strong>{{ priority }}</strong>
+            <em>{{ data.ticketsByPriority[priority] || 0 }}</em>
+            <div><span [style.width.%]="priorityShare(data, priority)"></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-panel dashboard-status-panel">
+        <div class="dashboard-panel-header">
+          <div>
+            <span>Status</span>
+            <h2>Queue movement</h2>
+          </div>
+          <button type="button">Live</button>
+        </div>
+
+        <div class="dashboard-status-list">
+          <div class="dashboard-status-row" *ngFor="let status of statuses">
+            <div>
+              <strong>{{ statusLabel(status) }}</strong>
+              <span>{{ data.ticketsByStatus[status] || 0 }} tickets</span>
+            </div>
+            <div class="dashboard-status-bar"><span [style.width.%]="statusShare(data, status)"></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-panel dashboard-workload-panel">
+        <div class="dashboard-panel-header">
+          <div>
+            <span>Agent workload</span>
+            <h2>Ownership map</h2>
+          </div>
+          <button type="button">{{ data.averageResolutionTimeHours | number:'1.1-1' }}h avg</button>
+        </div>
+
+        <div class="empty dashboard-empty" *ngIf="data.agentWorkload.length === 0">No assigned agent workload yet.</div>
+
+        <div class="dashboard-agent-list" *ngIf="data.agentWorkload.length > 0">
+          <div class="dashboard-agent-card" *ngFor="let agent of data.agentWorkload">
+            <div>
+              <strong>{{ agent.agentName }}</strong>
+              <span>{{ agent.agentEmail }}</span>
+            </div>
+            <div class="dashboard-agent-numbers">
+              <span>{{ agent.totalAssigned }} assigned</span>
+              <span>{{ agent.openCount }} open</span>
+              <span>{{ agent.inProgressCount }} active</span>
+            </div>
+            <div class="dashboard-agent-bar"><span [style.width.%]="agentLoadPercent(agent, data)"></span></div>
+          </div>
+        </div>
+      </article>
+    </section>
   </section>
 </ng-container>
