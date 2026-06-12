@@ -1059,7 +1059,7 @@ textarea.control {
 
 .landing-page {
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     linear-gradient(180deg, #fbfcf7 0%, #eff7f4 38%, #f8fbfb 100%);
   font-family: "Segoe UI Variable", "Aptos", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -1931,11 +1931,28 @@ textarea.control {
 
   .landing-nav {
     width: min(1180px, calc(100% - 24px));
-    min-height: 66px;
+    min-height: 62px;
+    gap: 10px;
   }
 
   .landing-nav-cta {
-    padding-inline: 12px;
+    min-height: 38px;
+    padding-inline: 11px;
+    font-size: 0.9rem;
+  }
+
+  .landing-nav .brand-mark {
+    width: 44px;
+    height: 30px;
+  }
+
+  .landing-brand {
+    min-width: 0;
+  }
+
+  .landing-brand span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .landing-hero,
@@ -1946,22 +1963,34 @@ textarea.control {
   }
 
   .landing-hero {
-    padding: 34px 0 46px;
-    min-height: 760px;
-    align-items: start;
-    overflow: hidden;
+    min-height: calc(100svh - 98px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+    padding: 24px 0 18px;
   }
 
   .landing-hero h1 {
-    font-size: clamp(2.72rem, 14vw, 4rem);
+    font-size: clamp(2.28rem, 11.5vw, 3.35rem);
+    line-height: 0.96;
+  }
+
+  .landing-kicker {
+    margin-bottom: 9px;
+    font-size: 0.68rem;
   }
 
   .landing-hero-copy > p:not(.landing-kicker) {
-    font-size: 1rem;
+    margin-top: 12px;
+    font-size: 0.96rem;
   }
 
   .landing-actions {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
   }
 
   .landing-proof {
@@ -1969,54 +1998,164 @@ textarea.control {
   }
 
   .landing-visual {
-    position: absolute;
-    right: -210px;
-    bottom: -210px;
-    width: 620px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
     margin-top: 0;
   }
 
   .landing-window {
-    height: 360px;
+    height: clamp(230px, 38svh, 300px);
+    border-radius: 10px;
+  }
+
+  .landing-window-bar {
+    min-height: 34px;
+    padding: 0 10px;
+  }
+
+  .landing-window-bar strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .landing-dashboard-preview {
-    grid-template-columns: 1fr;
-    min-height: 0;
+    height: calc(100% - 34px);
+    grid-template-columns: 76px minmax(0, 1fr);
+    min-height: auto;
   }
 
   .landing-preview-sidebar {
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    grid-template-columns: none;
-    overflow-x: auto;
-    border-right: 0;
-    border-bottom: 1px solid rgba(194, 210, 207, 0.7);
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    overflow: hidden;
+    border-right: 1px solid rgba(194, 210, 207, 0.7);
+    border-bottom: 0;
+    padding: 10px 8px;
+  }
+
+  .landing-preview-sidebar span {
+    padding: 6px 7px;
+    font-size: 0.64rem;
+  }
+
+  .landing-preview-logo {
+    width: 38px;
+    height: 27px;
   }
 
   .landing-preview-content {
-    padding: 16px;
+    padding: 10px;
   }
 
-  .landing-preview-header,
-  .landing-ticket-card {
-    grid-template-columns: 1fr;
+  .landing-preview-header {
+    gap: 8px;
   }
 
-  .landing-preview-header,
-  .landing-ticket-card {
-    display: grid;
+  .landing-preview-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .landing-mini-label,
+  .landing-live-dot {
+    font-size: 0.62rem;
   }
 
   .landing-stat-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .landing-stat-row div {
+    padding: 8px;
+  }
+
+  .landing-stat-row strong {
+    font-size: 1.12rem;
+  }
+
+  .landing-stat-row span {
+    font-size: 0.64rem;
+  }
+
+  .landing-ticket-deck {
+    height: 130px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .landing-ticket-card {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 6px;
+    min-height: 64px;
+    padding: 8px;
+  }
+
+  .landing-ticket-card span,
+  .landing-ticket-meta strong {
+    font-size: 0.62rem;
+  }
+
+  .landing-ticket-card h3 {
+    font-size: 0.82rem;
   }
 
   .landing-ticket-meta {
+    display: flex;
+    flex-wrap: wrap;
     justify-items: start;
+    gap: 4px;
   }
 
   .landing-section {
     padding: 58px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .landing-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .landing-actions .button {
+    min-height: 42px;
+    padding-inline: 8px;
+    font-size: 0.9rem;
+  }
+
+  .landing-hero {
+    gap: 12px;
+    padding: 14px 0 12px;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(1.95rem, 10vw, 2.35rem);
+  }
+
+  .landing-hero-copy > p:not(.landing-kicker) {
+    font-size: 0.9rem;
+  }
+
+  .landing-window {
+    height: clamp(168px, 31svh, 220px);
+  }
+
+  .landing-preview-sidebar {
+    display: none;
+  }
+
+  .landing-dashboard-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-ticket-deck {
+    display: none;
   }
 }
