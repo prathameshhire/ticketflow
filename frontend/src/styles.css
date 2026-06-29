@@ -1734,6 +1734,92 @@ textarea.control {
   }
 }
 
+@media (max-width: 1120px) {
+  .landing-nav {
+    grid-template-columns: 1fr auto;
+  }
+
+  .landing-nav-links {
+    display: none;
+  }
+
+  .landing-hero {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 38px;
+  }
+
+  .landing-hero::before {
+    display: none;
+  }
+
+  .landing-hero-copy {
+    max-width: 720px;
+  }
+
+  .landing-hero h1 {
+    max-width: 760px;
+    font-size: clamp(3rem, 8vw, 4.8rem);
+    line-height: 0.94;
+  }
+
+  .landing-hero-copy > p:not(.landing-kicker) {
+    max-width: 620px;
+  }
+
+  .landing-visual {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(760px, 100%);
+    align-self: flex-end;
+    margin-top: 30px;
+  }
+
+  .landing-window {
+    border-radius: 12px;
+  }
+
+  .landing-dashboard-preview {
+    grid-template-columns: 122px minmax(0, 1fr);
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 1120px) and (max-height: 640px) and (orientation: landscape) {
+  .landing-hero {
+    padding-top: 24px;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(2.45rem, 6vw, 3.6rem);
+  }
+
+  .landing-hero-copy > p:not(.landing-kicker) {
+    margin-top: 12px;
+    font-size: 1rem;
+  }
+
+  .landing-actions {
+    margin-top: 16px;
+  }
+
+  .landing-primary,
+  .landing-secondary {
+    min-height: 44px;
+  }
+
+  .landing-visual {
+    margin-top: 12px;
+  }
+
+  .landing-dashboard-preview {
+    min-height: 320px;
+  }
+}
+
 @media (max-width: 960px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -1820,7 +1906,7 @@ textarea.control {
 
   .landing-hero {
     min-height: 0;
-    padding-top: 42px;
+    padding-top: clamp(24px, 2.6vw, 42px);
   }
 
   .landing-hero-copy {
@@ -1845,7 +1931,7 @@ textarea.control {
     right: auto;
     bottom: auto;
     width: 100%;
-    margin-top: 34px;
+    margin-top: clamp(12px, 2vw, 34px);
   }
 
   .landing-window {
@@ -2144,7 +2230,7 @@ textarea.control {
   }
 
   .landing-window {
-    height: clamp(168px, 31svh, 220px);
+    height: auto;
   }
 
   .landing-preview-sidebar {
@@ -2152,7 +2238,9 @@ textarea.control {
   }
 
   .landing-dashboard-preview {
+    height: auto;
     grid-template-columns: 1fr;
+    min-height: 0;
   }
 
   .landing-ticket-deck {
